@@ -72,13 +72,15 @@ extension MainViewController: UITextFieldDelegate {
 extension MainViewController {
     private func autoLayout() {
         addressTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        addressTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 20).isActive = true
+        addressTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         addressTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         addressTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
         searchAddressOnWazeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         searchAddressOnWazeButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
         searchAddressOnWazeButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        searchAddressOnWazeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+
         searchAddressOnWazeButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40).isActive = true
     }
 }
