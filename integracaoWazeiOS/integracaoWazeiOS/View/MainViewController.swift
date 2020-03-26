@@ -16,6 +16,7 @@ final class MainViewController: UIViewController {
         addressTextField.placeholder = "Destination address"
         addressTextField.textContentType = .telephoneNumber
         addressTextField.clearButtonMode = .always
+        addressTextField.delegate = self
 
         return addressTextField
     }()
@@ -28,6 +29,7 @@ final class MainViewController: UIViewController {
         searchAddressOnWazeButton.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         searchAddressOnWazeButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         searchAddressOnWazeButton.addTarget(self, action: #selector(searchAddressInWazeButton(_ :)), for: .touchUpInside)
+        
 
         return searchAddressOnWazeButton
     }()
@@ -37,6 +39,7 @@ final class MainViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
         view.addSubview(addressTextField)
         view.addSubview(searchAddressOnWazeButton)
+
         autoLayout()
     }
 
@@ -44,11 +47,25 @@ final class MainViewController: UIViewController {
         guard let url = URL(string: "waze://") else { return }
         // Verifing if waze exists on this device.
         if UIApplication.shared.canOpenURL(url) {
-
+            guard let address = addressTextField.text else { return }
+            Localization().convertAddressToCoordinates(address) { (foundLocalization) in
+                let latitude = String(describing: foundLocalization.location!.coordinate.latitude)
+                let longitude = String(describing: foundLocalization.location!.coordinate.longitude)
+                let url: String = "waze://?ll=\(latitude),\(longitude)&navigate=yes"
+                guard let wazeUrlToAddress = URL(string: url) else { return }
+                UIApplication.shared.open(wazeUrlToAddress, options: [:], completionHandler: nil)
+            }
         } else {
             // treat error showing an alert, for exemple.
             print("Waze does not exists on this device")
         }
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 

@@ -9,7 +9,7 @@
 import CoreLocation
 
 final class Localization: NSObject {
-    public func convertAddressToCoordinates(address: String, local: @escaping(_ local: CLPlacemark) -> Void) {
+    public func convertAddressToCoordinates(_ address: String, local: @escaping(_ local: CLPlacemark) -> Void) {
         let converter = CLGeocoder()
         converter.geocodeAddressString(address) { (localizationList, error) in
             guard let localization = localizationList?.first else { return }
