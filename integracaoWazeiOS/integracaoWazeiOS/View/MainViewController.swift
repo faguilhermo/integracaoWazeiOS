@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     private lazy var addressTextField: UITextField = {
         let addressTextField = UITextField(frame: .zero)
@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController {
-    func autoLayout() {
+    private func autoLayout() {
         addressTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         addressTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 20).isActive = true
         addressTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
