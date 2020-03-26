@@ -41,7 +41,14 @@ class MainViewController: UIViewController {
     }
 
     @objc private func searchAddressInWazeButton(_ sender: UIButton) {
-        print("actino")
+        guard let url = URL(string: "waze://") else { return }
+        // Verifing if waze exists on this device.
+        if UIApplication.shared.canOpenURL(url) {
+
+        } else {
+            // treat error showing an alert, for exemple.
+            print("Waze does not exists on this device")
+        }
     }
 }
 

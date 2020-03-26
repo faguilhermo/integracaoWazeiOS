@@ -57,6 +57,7 @@
 				0C4F2754242D1A4300C3E1C7 /* AppDelegate.swift */,
 				0C4F2756242D1A4300C3E1C7 /* SceneDelegate.swift */,
 				0C4F276A242D1BA600C3E1C7 /* View */,
+				0C4F276B242D26BF00C3E1C7 /* Components */,
 				0C4F275D242D1A4500C3E1C7 /* Assets.xcassets */,
 				0C4F275F242D1A4500C3E1C7 /* LaunchScreen.storyboard */,
 				0C4F2762242D1A4500C3E1C7 /* Info.plist */,
@@ -70,6 +71,13 @@
 				0C4F2768242D1AA500C3E1C7 /* MainViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0C4F276B242D26BF00C3E1C7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
