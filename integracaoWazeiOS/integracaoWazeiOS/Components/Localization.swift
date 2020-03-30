@@ -9,6 +9,10 @@
 import CoreLocation
 
 final class Localization: NSObject {
+    /// Convert user's input in CLPlacemark coordinates.
+    /// - Parameter address: user input address.
+    /// - Parameter local: the coordinate found.
+    /// - Parameter local: the found coordinate escape to other function.
     public func convertAddressToCoordinates(_ address: String, local: @escaping(_ local: CLPlacemark) -> Void) {
         let converter = CLGeocoder()
         converter.geocodeAddressString(address) { (localizationList, error) in

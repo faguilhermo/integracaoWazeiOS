@@ -10,6 +10,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
 
+    // MARK: - UI elements
+    /// Creates a text field to receive address input.
     private lazy var addressTextField: UITextField = {
         let addressTextField = UITextField(frame: .zero)
         addressTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +23,7 @@ final class MainViewController: UIViewController {
         return addressTextField
     }()
 
+    /// Creates a button to open waze, if exist, and plot route.
     private lazy var searchAddressOnWazeButton: UIButton = {
         let searchAddressOnWazeButton = UIButton(type: .roundedRect)
         searchAddressOnWazeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -29,11 +32,11 @@ final class MainViewController: UIViewController {
         searchAddressOnWazeButton.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         searchAddressOnWazeButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         searchAddressOnWazeButton.addTarget(self, action: #selector(searchAddressInWazeButton(_ :)), for: .touchUpInside)
-        
 
         return searchAddressOnWazeButton
     }()
 
+    // MARK: - Application lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
@@ -43,6 +46,9 @@ final class MainViewController: UIViewController {
         autoLayout()
     }
 
+    // MARK: - Button actions
+    /// Button action to open waze, if it exists, and plot route.
+    /// - Parameter sender: button itself.
     @objc private func searchAddressInWazeButton(_ sender: UIButton) {
         guard let url = URL(string: "waze://") else { return }
         // Verifing if waze exists on this device.
@@ -62,7 +68,9 @@ final class MainViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension MainViewController: UITextFieldDelegate {
+    // Dismiss keyboard if return button is pressed.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -70,6 +78,7 @@ extension MainViewController: UITextFieldDelegate {
 }
 
 extension MainViewController {
+    /// Setup autolayout
     private func autoLayout() {
         addressTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         addressTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
@@ -80,7 +89,6 @@ extension MainViewController {
         searchAddressOnWazeButton.heightAnchor.constraint(equalToConstant: 70).isActive = true
         searchAddressOnWazeButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
         searchAddressOnWazeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-
         searchAddressOnWazeButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -40).isActive = true
     }
 }
